@@ -21,4 +21,4 @@ class Donation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.donor.full_name} - {self.amount}"
+        return f"{self.donor} - {self.amount}"
