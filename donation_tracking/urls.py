@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import include, path
 
 from users import views as user_views
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path("signup/", user_views.signup, name="signup"),
     path("login/", user_views.login, name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("causes/", include("donation.urls")),
 ]
 
 if settings.DEBUG:
