@@ -28,7 +28,7 @@ urlpatterns = [
     path("signup/", user_views.signup, name="signup"),
     path("login/", user_views.login, name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-    path("causes/", include("donation.urls")),
+    path("causes/", include("cause.urls")),
 ]
 
 if settings.DEBUG:

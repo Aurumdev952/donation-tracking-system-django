@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Cause, Donation
+from .models import Cause
 
 
 class CauseForm(forms.ModelForm):
