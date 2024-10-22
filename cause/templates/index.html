@@ -15,72 +15,74 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for cause in causes %}
         <div class="bg-white p-6 rounded-lg shadow-lg">
-          <img
-            src="{{ cause.banner_image.url }}"
-            alt="{{ cause.name }}"
-            class="w-full h-48 object-cover rounded-t-lg mb-4"
-          />
-          <div class="flex flex-col justify-between h-full">
-            <div>
-              <h3 class="text-xl font-bold mb-2">{{ cause.name }}</h3>
-              <p class="text-gray-700 mb-4">{{ cause.tagline }}</p>
-              <p class="text-gray-600">
-                {{ cause.description|truncatewords:20 }}
-              </p>
-              {% if user.profile.role == 'Admin' %}
-              <div class="flex mt-2 space-x-2">
-                <a
-                  href="{% url 'cause_update' cause.pk %}"
-                  class="flex items-center bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-700"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 mr-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+          <a href="{% url 'cause_detail' cause.pk %}">
+            <img
+              src="{{ cause.banner_image.url }}"
+              alt="{{ cause.name }}"
+              class="w-full h-48 object-cover rounded-t-lg mb-4"
+            />
+            <div class="flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl font-bold mb-2">{{ cause.name }}</h3>
+                <p class="text-gray-700 mb-4">{{ cause.tagline }}</p>
+                <p class="text-gray-600">
+                  {{ cause.description|truncatewords:20 }}
+                </p>
+                {% if user.profile.role == 'Admin' %}
+                <div class="flex mt-2 space-x-2">
+                  <a
+                    href="{% url 'cause_update' cause.pk %}"
+                    class="flex items-center bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-700"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 4v16m8-8H4"
-                    />
-                  </svg>
-                  Update
-                </a>
-                <a
-                  href="{% url 'cause_delete' cause.pk %}"
-                  class="flex items-center bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 mr-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                    Update
+                  </a>
+                  <a
+                    href="{% url 'cause_delete' cause.pk %}"
+                    class="flex items-center bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                  Delete
-                </a>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                    Delete
+                  </a>
+                </div>
+                {% else %}
+                <div class="flex mt-2 space-x-2">
+                  <a
+                    class="flex items-center bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
+                  >
+                    Donate
+                  </a>
+                </div>
+                {% endif %}
               </div>
-              {% else %}
-              <div class="flex mt-2 space-x-2">
-                <a
-                  class="flex items-center bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
-                >
-                  Donate
-                </a>
-              </div>
-              {% endif %}
             </div>
-          </div>
+          </a>
         </div>
         {% endfor %}
       </div>

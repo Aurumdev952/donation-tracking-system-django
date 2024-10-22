@@ -51,3 +51,8 @@ def cause_update(request, pk):
     else:
         form = CauseForm(instance=cause)
     return render(request, "create.html", {"form": form})
+
+
+def cause_detail(request, pk):
+    cause = get_object_or_404(Cause, pk=pk)
+    return render(request, "cause_detail.html", {"cause": cause})

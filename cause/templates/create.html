@@ -52,7 +52,7 @@
             type="datetime-local"
             name="end_date"
             id="id_end_date"
-            value="{{ form.end_date.value }}"
+            value="{{ form.end_date.value|date:'Y-m-d\\TH:i' }}"
             class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
@@ -61,7 +61,7 @@
             >Banner Image</label
           >
           {% if form.banner_image.value %}
-          <img src="/media/{{ form.banner_image.value }}" alt="banner_image" />
+          <img src="{{ form.banner_image.value.url }}" alt="banner_image" />
           {% endif %}
           <input
             type="file"
@@ -75,7 +75,7 @@
             >Cover Image</label
           >
           {% if form.cover_image.value %}
-          <img src="/media/{{ form.cover_image.value }}" alt="cover_image" />
+          <img src="{{ form.cover_image.value.url }}" alt="cover_image" />
           {% endif %}
           <input
             type="file"
