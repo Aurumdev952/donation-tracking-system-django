@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CauseForm
@@ -56,5 +57,7 @@ def cause_update(request, pk):
 
 
 def cause_detail(request, pk):
-    cause = get_object_or_404(Cause, pk=pk)
+    cause = Cause.objects.annotate(total_donations=Sum("donation__amount")).get(pk=pk)
+    if not cause:
+        return HttpResponseNotFound("Cause not found")
     return render(request, "cause_detail.html", {"cause": cause})
