@@ -22,6 +22,9 @@ env = environ.Env(DEBUG=(bool, False))
 env.read_env(str(BASE_DIR / ".env"))
 
 DB_PASSWORD = env("DB_PASSWORD")
+STRIPE_PUBLISHABLE_KEY = env("STRIPE_PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
+STRIPE_ENDPOINT_SECRET = env("STRIPE_ENDPOINT_SECRET")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -46,7 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "users",
     "donation",
-    "cause"
+    "cause",
 ]
 
 MIDDLEWARE = [
@@ -132,6 +135,8 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATIC_ROOT = "/"
+
+STATICFILES_DIRS = [BASE_DIR / "static"]  # new
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -146,5 +151,5 @@ FILE_UPLOAD_HANDLERS = [
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_URL = "/media/"

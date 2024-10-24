@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
+from django.db.models import Sum
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CauseForm
@@ -24,8 +25,9 @@ def cause_create(request):
     return render(request, "create.html", {"form": form})
 
 
+@login_required
 def cause_list(request):
-    causes = Cause.objects.all()
+    causes = Cause.objects.annotate(total_donations=Sum("donation__amount"))
     return render(request, "index.html", {"causes": causes})
 
 
