@@ -1,5 +1,7 @@
 from datetime import date, timedelta
 
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
 from django.db.models import Avg, F, Sum
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -8,6 +10,13 @@ from cause.models import Cause
 from donation.models import Donation
 
 
+def is_admin(user: User):
+    return user.profile.role == "Admin"
+
+
+# Create your views here.
+@login_required
+@user_passes_test(is_admin)
 def dashboard_view(request):
     total_causes = Cause.objects.count()
     total_donations = Donation.objects.aggregate(Sum("amount"))["amount__sum"] or 0
@@ -41,6 +50,8 @@ def dashboard_view(request):
     return render(request, "dashboard.html", context)
 
 
+@login_required
+@user_passes_test(is_admin)
 def dashboard_data_view(request):
     donations_by_date = (
         Donation.objects.annotate(date=F("created_at__date"))
