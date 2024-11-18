@@ -66,6 +66,7 @@
               <p class="text-gray-500">
                 Donations: {% if cause.total_donations %}${{ cause.total_donations }}{% else %}$0{% endif %}
               </p>
+              {% now "Y-m-d" as todays_date %}
               {% if user.profile.role == 'Admin' %}
               <div class="flex mt-2 space-x-2">
                 <a
@@ -109,7 +110,7 @@
                   Delete
                 </a>
               </div>
-              {% else %}
+              {% elif todays_date < cause.end_date|date:"Y-m-d" %}
               <div class="flex mt-2 space-x-2">
                 <button
                   data-id="{{ cause.pk }}"
@@ -118,6 +119,7 @@
                   Donate
                 </button>
               </div>
+              {% else %}
               {% endif %}
             </div>
           </div>

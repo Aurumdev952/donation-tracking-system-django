@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 
@@ -9,6 +11,10 @@ class Cause(models.Model):
     end_date = models.DateTimeField()
     banner_image = models.ImageField(upload_to="images/")
     cover_image = models.ImageField(upload_to="images/")
+
+    @property
+    def is_expired(self):
+        return date.today() > self.end_date
 
     def __str__(self):
         return self.name
