@@ -7,8 +7,8 @@ make sure you have python installed in you system
 clone the repository
 
 ```bash
-git clone
-cd project
+git clone https://github.com/Aurumdev952/donation-tracking-system-django
+cd donation-tracking-system-django
 ```
 
 setup virtual environment and activate it
