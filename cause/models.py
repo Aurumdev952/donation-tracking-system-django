@@ -9,8 +9,8 @@ class Cause(models.Model):
     tagline = models.CharField(max_length=150)
     description = models.TextField()
     end_date = models.DateTimeField()
-    banner_image = models.ImageField(upload_to="images/")
-    cover_image = models.ImageField(upload_to="images/")
+    banner_image = models.ImageField(upload_to="images/", blank=True)
+    cover_image = models.ImageField(upload_to="images/", blank=True)
 
     @property
     def is_expired(self):
