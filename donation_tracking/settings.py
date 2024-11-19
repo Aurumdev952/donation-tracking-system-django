@@ -22,6 +22,10 @@ env = environ.Env(DEBUG=(bool, False))
 env.read_env(str(BASE_DIR / ".env"))
 
 DB_PASSWORD = env("DB_PASSWORD")
+DB_HOST = env("DB_HOST")
+DB_PORT = env("DB_PORT")
+DB_DATABASE = env("DB_DATABASE")
+DB_USER = env("DB_USER")
 STRIPE_PUBLISHABLE_KEY = env("STRIPE_PUBLISHABLE_KEY")
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 STRIPE_ENDPOINT_SECRET = env("STRIPE_ENDPOINT_SECRET")
@@ -90,11 +94,11 @@ WSGI_APPLICATION = "donation_tracking.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "dts",
-        "USER": "postgres",
+        "NAME": DB_DATABASE,
+        "USER": DB_USER,
         "PASSWORD": DB_PASSWORD,
-        "HOST": "localhost",
-        "PORT": "5432",
+        "HOST": DB_HOST,
+        "PORT": DB_PORT,
     }
 }
 
