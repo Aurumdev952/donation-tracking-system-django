@@ -1,5 +1,5 @@
 run:
-	python manage.py runserver 0.0.0.0:3000
+	python manage.py runserver
 activate:
 	.\venv\Scripts\activate
 migrate:
